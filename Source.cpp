@@ -5,13 +5,13 @@
 using namespace std;
 
 const int MAX_TRIES = 10;
-int letterFill(char, string, string&);
+int letterFill(char, string, string &);
 
 /* Take a one character guess and the secret word, and fill in the
  unfinished guessword. Returns number of characters matched.
  Also, returns zero if the character is already guessed. */
 
-int letterFill(char guess, string secretword, string& guessword)
+int letterFill(char guess, string secretword, string &guessword)
 {
 	int i;
 	int matches = 0;
@@ -38,8 +38,7 @@ int main()
 	int num_of_wrong_guesses = 0;
 	string word;
 	string words[] =
-	{	"afghanistan","albania","algeria","andorra","angola","anguilla","argentina","armenia","aruba","australia","austria","azerbaijan","bahamas","bahrain","bangladesh","barbados","belarus","belgium","belize","benin","bermuda","bhutan","bolivia","botswana","brazil","brunei","bulgaria","burundi","cambodia","cameroon","chad","chile","china","colombia","congo","croatia","cuba","cyprus","denmark","djibouti","dominica","ecuador","egypt","estonia","ethiopia","fiji","finland","france","gabon","gambia","georgia","germany","ghana","gibraltar","greece","greenland","grenada","guam","guatemala","guernsey","guinea","guyana","haiti","honduras","hungary","iceland","india","indonesia","iran","iraq","ireland","israel","italy","jamaica","japan","jersey","jordan","kazakhstan","kenya","kuwait","laos","latvia","lebanon","lesotho","liberia","libya","liechtenstein","lithuania","luxembourg","macau","macedonia","madagascar","malawi","malaysia","maldives","mali","malta","mauritania","mauritius","mexico","moldova","monaco","mongolia","montenegro","montserrat","morocco","mozambique","namibia","nepal","netherlands","nicaragua","niger","nigeria","norway","oman","pakistan","palestine","panama","paraguay","peru","philippines","poland","portugal","qatar","reunion","romania","russia","rwanda","samoa","satellite","senegal","serbia","seychelles","singapore","slovakia","slovenia","spain","sudan","suriname","swaziland","sweden","switzerland","syria","taiwan","tajikistan","tanzania","thailand","togo","tonga","tunisia","turkey","turkmenistan","uganda","ukraine","uruguay","uzbekistan","venezuela","vietnam","yemen","zambia","zimbabwe"
-	};
+		{"afghanistan", "albania", "algeria", "andorra", "angola", "anguilla", "argentina", "armenia", "aruba", "australia", "austria", "azerbaijan", "bahamas", "bahrain", "bangladesh", "barbados", "belarus", "belgium", "belize", "benin", "bermuda", "bhutan", "bolivia", "botswana", "brazil", "brunei", "bulgaria", "burundi", "cambodia", "cameroon", "chad", "chile", "china", "colombia", "congo", "croatia", "cuba", "cyprus", "denmark", "djibouti", "dominica", "ecuador", "egypt", "estonia", "ethiopia", "fiji", "finland", "france", "gabon", "gambia", "georgia", "germany", "ghana", "gibraltar", "greece", "greenland", "grenada", "guam", "guatemala", "guernsey", "guinea", "guyana", "haiti", "honduras", "hungary", "iceland", "india", "indonesia", "iran", "iraq", "ireland", "israel", "italy", "jamaica", "japan", "jersey", "jordan", "kazakhstan", "kenya", "kuwait", "laos", "latvia", "lebanon", "lesotho", "liberia", "libya", "liechtenstein", "lithuania", "luxembourg", "macau", "macedonia", "madagascar", "malawi", "malaysia", "maldives", "mali", "malta", "mauritania", "mauritius", "mexico", "moldova", "monaco", "mongolia", "montenegro", "montserrat", "morocco", "mozambique", "namibia", "nepal", "netherlands", "nicaragua", "niger", "nigeria", "norway", "oman", "pakistan", "palestine", "panama", "paraguay", "peru", "philippines", "poland", "portugal", "qatar", "reunion", "romania", "russia", "rwanda", "samoa", "satellite", "senegal", "serbia", "seychelles", "singapore", "slovakia", "slovenia", "spain", "sudan", "suriname", "swaziland", "sweden", "switzerland", "syria", "taiwan", "tajikistan", "tanzania", "thailand", "togo", "tonga", "tunisia", "turkey", "turkmenistan", "uganda", "ukraine", "uruguay", "uzbekistan", "venezuela", "vietnam", "yemen", "zambia", "zimbabwe"};
 
 	//choose and copy a word from array of words randomly
 	srand(static_cast<unsigned int>(time(NULL)));
@@ -47,7 +46,7 @@ int main()
 	word = words[n];
 
 	// Initialize the secret word with the * character.
-	string unknown(word.length(), '*');
+	string unknown(word.length(), '_');
 
 	// welcome the user
 	cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -62,19 +61,26 @@ int main()
 	// Loop until the guesses are used up
 	while (num_of_wrong_guesses < MAX_TRIES)
 	{
-		cout << "\n\n" << unknown;
+		cout << "\n\n";
+		for (int i = 0; i < unknown.length(); i++)
+		{
+			cout << unknown[i] << " ";
+		}
 		cout << "\n\nGuess a letter: ";
 		cin >> letter;
+
 		// Fill secret word with letter if the guess is correct,
 		// otherwise increment the number of wrong guesses.
 		if (letterFill(letter, word, unknown) == 0)
 		{
-			cout << endl << "Whoops! That letter isn't in there!" << endl;
+			cout << endl
+				 << "Whoops! That letter isn't in there!" << endl;
 			num_of_wrong_guesses++;
 		}
 		else
 		{
-			cout << endl << "You found a letter! Isn't that exciting!" << endl;
+			cout << endl
+				 << "You found a letter! Isn't that exciting!" << endl;
 		}
 		// Tell user how many guesses has left.
 		cout << "You have " << MAX_TRIES - num_of_wrong_guesses;
@@ -82,7 +88,8 @@ int main()
 		// Check if user guessed the word.
 		if (word == unknown)
 		{
-			cout << endl << word << endl;
+			cout << endl
+				 << word << endl;
 			cout << "Yeah! You got it!";
 			char choice;
 			cout << "\nDo you wish to play again? (Y/N): ";
