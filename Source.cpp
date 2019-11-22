@@ -33,7 +33,6 @@ int letterFill(char guess, string secretword, string &guessword)
 
 int main()
 {
-	string name;
 	char letter;
 	int num_of_wrong_guesses = 0;
 	string word;
